@@ -27,7 +27,7 @@
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/le.tar dest=/etc/letsencrypt/le.tar
 
     - name: Decompress conf files
-      shell: "tar -xf /etc/letsencrypt/le.tar"
+      shell: "cd /etc/letsencrypt/ && tar -xf le.tar"
 
     - name: Install oauth2
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth2_proxy  dest=/sbin/oauth2_proxy
