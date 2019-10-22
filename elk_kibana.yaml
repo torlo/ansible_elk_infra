@@ -32,6 +32,9 @@
     - name: Install oauth2
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth2_proxy  dest=/sbin/oauth2_proxy
 
+    - name: Define execution rights for oauth2
+      shell: "chmod 744 /sbin/oauth2_proxy"
+
     - name: Configure oauth2
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth_proxy.cfg  dest=/etc/oauth2_proxy.cfg
 
