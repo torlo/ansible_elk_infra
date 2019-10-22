@@ -1,4 +1,4 @@
-name: Playbook for configure kibana
+- name: Playbook for configure kibana
   hosts: "{{ remote_hosts }}"
   strategy: linear
   remote_user: ansible
@@ -21,22 +21,22 @@ name: Playbook for configure kibana
         - python2-certbot-nginx
 
     - name: configure NGINX
-      copy: src=inventory/vars/elk_cluster/kibana/nginx_default.conf dest=/etc/nginx/conf.d/default.conf
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/nginx_default.conf dest=/etc/nginx/conf.d/default.conf
 
     - name: Copy Configure Certbot
-      copy: src=inventory/vars/elk_cluster/kibana/le.tar dest=/etc/letsencrypt/le.tar
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/le.tar dest=/etc/letsencrypt/le.tar
 
     - name: Decompress conf files
       shell: "tar -xf /etc/letsencrypt/le.tar"
 
     - name: Install oauth2
-      copy: src=inventory/vars/elk_cluster/kibana/oauth2_proxy  dest=/sbin/oauth2_proxy
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth2_proxy  dest=/sbin/oauth2_proxy
 
     - name: Configure oauth2
-      copy: src=inventory/vars/elk_cluster/kibana/oauth_proxy.cfg  dest=/etc/oauth2_proxy.cfg
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth_proxy.cfg  dest=/etc/oauth2_proxy.cfg
 
     - name: Define oauth2 as service
-      copy: src=inventory/vars/elk_cluster/kibana/oauth2.service  dest=/etc/systemd/system/oauth2.service
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth2.service  dest=/etc/systemd/system/oauth2.service
 
     - name: Reload systemctl daemon
       shell: "systemctl daemon-reload"
