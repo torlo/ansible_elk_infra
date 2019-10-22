@@ -1,2 +1,12 @@
 name: Playbook for configure elastic
-  
+  hosts: "{{ remote_hosts }}"
+  strategy: linear
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+
+  vars:
+
+
+  tasks:
+    -name:
