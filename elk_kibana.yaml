@@ -41,5 +41,11 @@
     - name: Reload systemctl daemon
       shell: "systemctl daemon-reload"
 
+    - name: Start nginx service
+      service: name=nginx state=started enabled=yes
+
+    - name: Start kibana service
+      service: name=kibana state=started enabled=yes
+
     - name: Start oauth2 service
       service: name=oauth2 state=started enabled=yes
