@@ -1,4 +1,4 @@
-name: Playbook for configure elastic
+- name: Playbook for configure elastic
   hosts: "{{ remote_hosts }}"
   strategy: linear
   remote_user: ansible

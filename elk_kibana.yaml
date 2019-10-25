@@ -1,6 +1,6 @@
 - name: Playbook for configure kibana
   hosts: "{{ remote_hosts }}"
-  elastic1ip: "{{ elastic1 }}"
+#  elastic1ip: "{{ elastic1 }}"
   strategy: linear
   remote_user: ansible
   become: yes
