@@ -9,4 +9,20 @@ name: Playbook for configure elastic
 
 
   tasks:
-    -name:
+    - name: install Elasticsearch
+      yum: name=elasticsearch state=present
+
+    - name: define configuration files for elastic1
+      copy: src=$ANSIBLE_HOME/inventory/vars/elk_cluster/elastic/elastic1.yml dest=/etc/elasticsearch/elasticsearch.yml
+      when: ansible_hostname == "elastic1"
+
+    - name: define configuration files for elastic2
+      copy: src=$ANSIBLE_HOME/inventory/vars/elk_cluster/elastic/elastic2.yml dest=/etc/elasticsearch/elasticsearch.yml
+      when: ansible_hostname == "elastic2"
+
+    - name: define configuration files for elastic3
+      copy: src=$ANSIBLE_HOME/inventory/vars/elk_cluster/elastic/elastic3.yml dest=/etc/elasticsearch/elasticsearch.yml
+      when: ansible_hostname == "elastic3"
+
+    - name: start elasticsearch
+      service: name=elasticsearch state=started enabled=yes
