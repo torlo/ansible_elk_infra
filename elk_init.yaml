@@ -1,4 +1,4 @@
-name: Playbook for configure ELK cluster 
+- name: Playbook for configure ELK cluster 
   hosts: "{{ remote_hosts }}"
   strategy: linear
   remote_user: ansible
@@ -10,3 +10,4 @@ name: Playbook for configure ELK cluster
 
   tasks:
     -name:
+
