@@ -1,4 +1,4 @@
-name: Playbook for configure logstash
+- name: Playbook for configure logstash
   hosts: "{{ remote_hosts }}"
   strategy: linear
   remote_user: ansible
@@ -9,4 +9,15 @@ name: Playbook for configure logstash
 
 
   tasks:
-    -name:
+    - name: Install logstash
+      yum: name=logstash state=present
+
+    - name: Copy files to dest servers
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/logstash/{{ item }}.j2 dest=/etc/logstash/conf.d/{{ item }}
+        with_items:
+          - 02-beats-input.conf
+          - 10-syslog-filter.conf
+          - 30-elasticsearch-output.conf
+
+    - name: Start Logstash
+      service: name=logstash state=started enabled=yes
