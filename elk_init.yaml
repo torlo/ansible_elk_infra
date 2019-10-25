@@ -1,4 +1,4 @@
-- name: Playbook for configure ELK cluster 
+- name: Playbook for configure ELK cluster
   hosts: "{{ remote_hosts }}"
   strategy: linear
   remote_user: ansible
@@ -9,5 +9,5 @@
 
 
   tasks:
-    -name:
-
+    - name: Copy file etc/hosts to all servers on elk_cluster
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/hosts.j2 dst=/etc/hosts
