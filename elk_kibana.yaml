@@ -10,9 +10,6 @@
 
 
   tasks:
-    - name: install EPEL repo
-      shell: "amazon-linux-extras install epel -y"
-
     - name: install kibana and nginx
       yum: name={{ item }} state=present
       with_items:
