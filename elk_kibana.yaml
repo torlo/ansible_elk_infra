@@ -26,7 +26,7 @@
     - name: Copy Configure Certbot
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/le.tar dest=/etc/letsencrypt/le.tar
 
-    - name: Copy Configure Certbot
+    - name: Copy Configure Kibana
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/kibana.yml.j2 dest=/etc/kibana/kibana.yml
 
     - name: Decompress conf files
