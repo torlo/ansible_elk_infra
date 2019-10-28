@@ -24,5 +24,11 @@
       copy: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic1.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
       when: ansible_hostname == "elastic3"
 
+    - name: change parameter Xms in jvm option
+      shell: "sed -i 's/-Xms1g/-Xms512m/g' /etc/elasticsearch/jvm.options"
+
+    - name: change parameter Xmx in jvm option
+      shell: "sed -i 's/-Xmx1g/-Xmx512m/g' /etc/elasticsearch/jvm.options"
+
     - name: start elasticsearch
       service: name=elasticsearch state=started enabled=yes
