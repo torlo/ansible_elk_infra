@@ -1,6 +1,5 @@
 - name: Playbook for configure kibana
   hosts: "{{ remote_hosts }}"
-#  elastic1ip: "{{ elastic1 }}"
   strategy: linear
   remote_user: ansible
   become: yes
@@ -22,16 +21,13 @@
       shell: "sudo setsebool httpd_can_network_connect 1 -P"
 
     - name: configure NGINX
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/nginx_default.conf dest=/etc/nginx/conf.d/default.conf
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/nginx_default.conf.j2 dest=/etc/nginx/conf.d/default.conf
 
     - name: Copy Configure Certbot
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/le.tar dest=/etc/letsencrypt/le.tar
 
     - name: Copy Configure Certbot
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/kibana.yml dest=/etc/kibana/kibana.yml
-
-    - name: Define elasticsearch.hosts on kibana.yml
-      shell: "sed -i 's/elastic1ip/{{ elastic1ip }}/g' /etc/kibana/kibana.yml"
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/kibana.yml.j2 dest=/etc/kibana/kibana.yml
 
     - name: Decompress conf files
       shell: "cd /etc/letsencrypt/ && tar -xf le.tar"
@@ -43,10 +39,10 @@
       shell: "chmod 744 /sbin/oauth2_proxy"
 
     - name: Configure oauth2
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth_proxy.cfg  dest=/etc/oauth2_proxy.cfg
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth_proxy.cfg.j2  dest=/etc/oauth2_proxy.cfg
 
     - name: Define oauth2 as service
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth2.service  dest=/etc/systemd/system/oauth2.service
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/oauth2.service.j2  dest=/etc/systemd/system/oauth2.service
 
     - name: Reload systemctl daemon
       shell: "systemctl daemon-reload"
