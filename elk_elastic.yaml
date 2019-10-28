@@ -21,7 +21,7 @@
       when: ansible_hostname == "elastic2"
 
     - name: define configuration files for elastic3
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic1.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic3.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
       when: ansible_hostname == "elastic3"
 
     - name: change parameter Xms in jvm option
