@@ -19,6 +19,7 @@
 
     - name: Disable SELinux
       shell: "sudo setsebool httpd_can_network_connect 1 -P"
+      ignore_errors: yes
 
     - name: configure NGINX
       copy: src=/etc/ansible/inventory/vars/elk_cluster/kibana/nginx_default.conf.j2 dest=/etc/nginx/conf.d/default.conf
@@ -52,9 +53,11 @@
 
     - name: clear elk data 1
       shell: "curl -XDELETE http://{{elastic1ip}}:9200/.kibana_1"
+      ignore_errors: yes
 
     - name: clear elk data 2
       shell: "curl -XDELETE http://{{elastic1ip}}:9200/.kibana_2"
+      ignore_errors: yes
 
     - name: Start kibana service
       service: name=kibana state=started enabled=yes
