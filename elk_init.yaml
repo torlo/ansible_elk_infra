@@ -11,3 +11,9 @@
   tasks:
     - name: Copy file etc/hosts to all servers on elk_cluster
       copy: src=/etc/ansible/inventory/vars/elk_cluster/hosts.j2 dst=/etc/hosts
+
+    - name: install Java
+      yum: name={{ item }} state=present
+      with_items:
+        - install java-1.8.0-openjdk
+        - install java-1.8.0-openjdk-devel
