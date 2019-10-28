@@ -1,0 +1,23 @@
+- name: Playbook for configure ELK cluster
+  hosts: "{{ remote_hosts }}"
+  strategy: linear
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+
+  vars:
+
+
+  tasks:
+    - name: Copy file etc/hosts to all servers on elk_cluster
+      copy: src=/etc/ansible/inventory/vars/elk_cluster/hosts.j2 dest=/etc/hosts
+
+    - name: install EPEL repo
+      shell: "amazon-linux-extras install epel -y"
+
+    - name: install Java
+      yum: name={{ item }} state=present
+      with_items:
+        - java-1.8.0-openjdk
+        - java-1.8.0-openjdk-devel
+
