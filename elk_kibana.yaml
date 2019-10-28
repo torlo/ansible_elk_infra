@@ -52,11 +52,11 @@
       service: name=nginx state=started enabled=yes
 
     - name: clear elk data 1
-      shell: "curl -XDELETE http://{{elastic1ip}}:9200/.kibana_1"
+      shell: "curl -XDELETE http://elastic1.local:9200/.kibana_1"
       ignore_errors: yes
 
     - name: clear elk data 2
-      shell: "curl -XDELETE http://{{elastic1ip}}:9200/.kibana_2"
+      shell: "curl -XDELETE http://elastic1.local:9200/.kibana_2"
       ignore_errors: yes
 
     - name: Start kibana service
