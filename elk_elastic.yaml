@@ -16,7 +16,7 @@
 
     - name: show IP
       debug:
-        msg: "IP is - 'elastic1_ip.stdout'"
+              msg: "IP is - {{ elastic1_ip.stdout }}"
       when: ansible_hostname == "elastic1"
 
     - name: Define elastic2 private IP
