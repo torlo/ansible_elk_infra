@@ -14,6 +14,11 @@
       register: elastic1_ip
       when: ansible_hostname == "elastic1"
 
+    - name: show IP
+      debug:
+        msg: "IP is - 'elastic1_ip.stdout'"
+      when: ansible_hostname == "elastic1"
+
     - name: Define elastic2 private IP
       shell: "ifconfig -a | grep broadcast | awk '{print $2}'"
       register: elastic2_ip
