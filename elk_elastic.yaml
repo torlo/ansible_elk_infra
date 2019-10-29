@@ -24,16 +24,6 @@
       register: elastic3_ip
       when: ansible_hostname == "elastic3"
 
-    - name: Define elastic2 private IP
-      shell: "ifconfig -a | grep broadcast | awk '{print $2}'"
-      register: elastic2_ip
-      when: ansible_hostname == "elastic2"
-
-    - name: Define elastic3 private IP
-      shell: "ifconfig -a | grep broadcast | awk '{print $2}'"
-      register: elastic3_ip
-      when: ansible_hostname == "elastic3"
-
     - name: install Elasticsearch
       yum: name=elasticsearch state=present
 
