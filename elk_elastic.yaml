@@ -9,19 +9,34 @@
 
 
   tasks:
+    - name: Define elastic1 private IP
+      shell: "ifconfig -a | grep broadcast | awk '{print $2}'"
+      register: elastic1_ip
+      when: ansible_hostname == "elastic1"
+
+    - name: Define elastic2 private IP
+      shell: "ifconfig -a | grep broadcast | awk '{print $2}'"
+      register: elastic2_ip
+      when: ansible_hostname == "elastic2"
+
+    - name: Define elastic3 private IP
+      shell: "ifconfig -a | grep broadcast | awk '{print $2}'"
+      register: elastic3_ip
+      when: ansible_hostname == "elastic3"
+
     - name: install Elasticsearch
       yum: name=elasticsearch state=present
 
     - name: define configuration files for elastic1
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic1.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+      template: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic1.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
       when: ansible_hostname == "elastic1"
 
     - name: define configuration files for elastic2
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic2.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+      template: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic2.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
       when: ansible_hostname == "elastic2"
 
     - name: define configuration files for elastic3
-      copy: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic3.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+      template: src=/etc/ansible/inventory/vars/elk_cluster/elastic/elastic3.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
       when: ansible_hostname == "elastic3"
 
     - name: change parameter Xms in jvm option
