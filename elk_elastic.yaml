@@ -40,13 +40,13 @@
       when: ansible_hostname == "elastic3"
 
     - name: Define elastic1 IP
-      shell: "sed -i 's/elastic1_ip/{{elastic1.stdout}}/g' /etc/elasticsearch/elasticsearch.yml"
+      shell: "sed -i 's/elastic1_ip/{{ elastic1.stdout }}/g' /etc/elasticsearch/elasticsearch.yml"
 
     - name: Define elastic2 IP
-      shell: "sed -i 's/elastic2_ip/{{elastic2.stdout}}/g' /etc/elasticsearch/elasticsearch.yml"
+      shell: "sed -i 's/elastic2_ip/{{ elastic2.stdout }}/g' /etc/elasticsearch/elasticsearch.yml"
 
     - name: Define elastic3 IP
-      shell: "sed -i 's/elastic3_ip/{{elastic3.stdout}}/g' /etc/elasticsearch/elasticsearch.yml"
+      shell: "sed -i 's/elastic3_ip/{{ elastic3.stdout }}/g' /etc/elasticsearch/elasticsearch.yml"
 
     - name: change parameter Xms in jvm option
       shell: "sed -i 's/-Xms1g/-Xms512m/g' /etc/elasticsearch/jvm.options"
